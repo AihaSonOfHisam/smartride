@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartRide - Login</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="left-section">
+      <img src="icon.png" alt="Smart Ride" class="icon">
+      <h1>Smart Ride</h1>
+    </div>
+    <div class="right-section">
+      <div class="login-box">
+        <h2>Log In</h2>
+        <form action="../index.html">
+          <!-- Username field -->
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Username" required>
+          
+          <!-- Password field -->
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Password" required>
+
+          <!-- Buttons -->
+          <button type="submit" class="btn">Log In as User</button>
+          <button type="button" class="btn secondary" onclick="window.location.href='../ownerCars.html'">Log In as Owner</button>
+        </form>
+
+        <!-- Links for sign-up and return -->
+        <p class="guest-option">
+          Don’t have an account? <a href="SignupUser.html">Sign Up Now</a>
+        </p>
+        <p class="guest-option">
+          <a href="../index.html">Return to Main Page</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
