@@ -1,3 +1,28 @@
+<?php
+    session_start([
+      'cookie_lifetime' => 0,
+      'cookie_secure' => true,
+      'cookie_httponly' => true,
+      'cookie_samesite' => 'Strict',
+  ]); // Start the session (if not already started)
+
+   // Implement session timeout
+   $timeout = 1800; // 30 minutes
+   if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $timeout)) {
+         session_unset();
+         session_destroy();
+         header("Location: Login/Login.html");
+         exit();
+   }
+   $_SESSION['last_activity'] = time();
+
+    if (isset($_SESSION['username'])) {
+        // User is logged in, continue with the rest of the code
+    } else {
+        // User is not logged in, redirect to login page
+        echo '<script>alert("Please log in to continue!"); window.location.href = "Login/Login.html";</script>';
+    }
+?>
 
 <html lang="en">
    <head>
@@ -8,7 +33,8 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>SmartRide Rental</title>
+      <title>Available Vehicle</title>
+
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -16,6 +42,8 @@
       <link rel="stylesheet" href="css/bootstrap.min.css">
       <!-- style css -->
       <link rel="stylesheet" href="css/style.css">
+      <!-- availableCars css -->
+      <link rel="stylesheet" href="css/availableCars.css"> 
       <!-- Responsive-->
       <link rel="stylesheet" href="css/responsive.css">
       <!-- fevicon -->
@@ -32,7 +60,7 @@
    <!-- body -->
    <body class="main-layout">
       <!-- loader  -->
-      <div class="loader_bg">
+       <div class="loader_bg">
          <div class="loader"><img src="images/loading.gif" alt="#" /></div>
       </div>
       <!-- end loader -->
@@ -58,31 +86,14 @@
 						 <button id="scrollToTop" title="Scroll to Top">↑</button>
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                            <ul class="navbar-nav mr-auto">
-                              <li class="nav-item">
-                                 <a class="nav-link" href="#section1">About</a>
+							  <li class="nav-item">
+                                 <a class="nav-link" href="index.php">Home</a>
                               </li>
                               <li class="nav-item">
                                  <a class="nav-link" href="#section4">Contact us</a>
                               </li>
                            </ul>
                            <?php
-                           session_start([
-                               'cookie_lifetime' => 0,
-                               'cookie_secure' => true,
-                               'cookie_httponly' => true,
-                               'cookie_samesite' => 'Strict',
-                           ]);
-                           
-                           // Implement session timeout
-                           $timeout = 1800; // 30 minutes
-                           if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $timeout)) {
-                               session_unset();
-                               session_destroy();
-                               header("Location: Login/Login.html");
-                               exit();
-                           }
-                           $_SESSION['last_activity'] = time();
-                           
                            if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
                                echo '<div class="sign_btn"><a href="Login/logout.php">Log out</a></div>';
                            } else {
@@ -99,113 +110,89 @@
       <!-- end header inner -->
       <!-- end header -->
       <!-- banner -->
-      <section class="banner_main">
-         <div class="container">
-            <div class="row d_flex">
-               <div class="col-md-12">
-                  <div class="text-bg">
-                     <h1>SmartRide Rental</h1>
-                     <strong>Discover the Freedom of the Open Road of Selangor</strong>
-                     <span>Rent Your Dream Vehicle Today!</span>
-                     <a href="availablecars.php">Available Vehicle</a>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-      </div>
-      <!-- end banner -->
-      <!-- car -->
-	  <section id="section1">
-      <div  class="car">
+<section id="section2">
+      <div class="availableCar">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
                   <div class="titlepage">
-                     <h2>VARIETY OF VEHICLE</h2>
-                     <span>Our car rental company is proud to offer a diverse fleet of vehicles, including cars, and SUVs, exclusively serving the area of Selangor. Whether you're planning a solo trip and require a compact car, embarking on a family vacation and need a spacious SUV, or seeking a rugged truck for an adventurous weekend, we have the ideal vehicle to fulfill your requirements. Rest assured that our well-maintained vehicles are ready to provide a perfect ride for your next journey in Selangor.</span>
+                     <h2>Available vEHICLE</h2>
                   </div>
                </div>
             </div>
-            <div class="row">
-               <div class="col-md-4 padding_leri">
-                  <div class="car_box">
-                     <figure><img src="images/alphard.png" alt="#"/></figure>
-                     <h3>Toyota</h3>
-                  </div>
-               </div>
-               <div class="col-md-4 padding_leri">
-                  <div class="car_box">
-                     <figure><img src="images/axianew.png" alt="#"/></figure>
-                     <h3>Perodua</h3>
-                  </div>
-               </div>
-               <div class="col-md-4 padding_leri">
-                  <div class="car_box">
-                     <figure><img src="images/car_img3.png" alt="#"/></figure>
-                     <h3>Proton</h3>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-	  </section>
-      <!-- end car -->
-      <!-- choose  section -->
-      <div class="choose ">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="titlepage1">
-                     <h2>Why Choose Us</h2>
-					 <p></p>
-                     <span>We understand that you have a choice when it comes to renting a vehicle. That's why we're committed to providing you with the best possible experience from start to finish.</span>
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="choose_box">
-                     <span>01</span>
-                     <p>Our number one priority is making sure that our customers are satisfied with their rental experience. From the moment you contact us to reserve a vehicle to the moment you return it, our team will be there to answer any questions you may have and provide assistance whenever you need it.</p>
-                  </div>
-               </div>
-               <div class="col-md-12">
-                  <div class="choose_box">
-                     <span>02</span>
-                     <p>We know that every customer has different needs when it comes to renting a vehicle. That's why we offer a wide selection of cars, trucks, and SUVs to choose from. Whether you need a small car for a weekend getaway or a large SUV for a family road trip, we have the perfect vehicle for you.</p>
-                  </div>
-               </div>
-               <div class="col-md-12">
-                  <div class="choose_box">
-                     <span>03</span>
-                     <p>We understand that renting a vehicle can be expensive, which is why we offer competitive pricing on all of our rentals. We believe that everyone should have access to reliable transportation at an affordable price.</p>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- end choose  section -->
+			
+			<div class="row">
+				<div class="col-md-12">
+					<div class="search-label">  
+						<div class="titlepage">
+							<div class="search-container">
+								Search Brand:
+								<div class="search-box">
+									<input type="text" name="searched_brand" id="search-brand" placeholder="Search..." />
+								</div>
+								<div class="sign_btn">
+									<a id="search-btn" href="#">Search</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+        
+        <?php
+         require_once('testdatabase.php'); // Include your database connection
 
+         // Query to retrieve cars with status = 'available'
+         $query = "SELECT * FROM car WHERE status = 'available'";
+         $statement = oci_parse($dbconn, $query);
+         oci_execute($statement);
+
+         // Loop through the results and display each car
+         while ($row = oci_fetch_assoc($statement)) {
+             $carLabel = $row['BRAND'] . ' ' . $row['MODEL']; // Combine brand and model
+            echo '
+            <div class="car-container">
+               <img class="car-image" src="images/' . htmlspecialchars($row['IMAGE_PATH']) .'">
+               <div class="car-details">
+                     <div class="car-label">' . htmlspecialchars($carLabel) . '</div>
+                     <div class="car-info">Color: ' . htmlspecialchars($row['COLOUR']) . '</div>
+                     <div class="car-info">Type: ' . htmlspecialchars($row['TYPE']) . '</div>
+                     <div class="car-info">Transmission: ' . htmlspecialchars($row['TRANSMISSION']) . '</div>
+                     <div class="car-info">' . htmlspecialchars($row['SEAT_NUM']) . ' Seater</div>
+                     <div class="car-info">Price per Day: RM ' . htmlspecialchars($row['PRICE_PER_DAY']) . '</div>
+                     <div class="car-info">Price per Week: RM ' . htmlspecialchars($row['PRICE_PER_WEEK']) . '</div>
+                     <div class="car-info">Price per Month: RM ' . htmlspecialchars($row['PRICE_PER_MONTH']) . '</div>
+                     <div class="select-btn"><a href="reserve.php?selected_plate_num=' . $row['PLATE_NUM'] . '">Select</a></div>
+               </div>
+            </div>
+            ';
+         }
+
+         oci_free_statement($statement);
+         oci_close($dbconn);
+         ?>
+
+
+         </div>
+      </div>
+</section>
+        
       <!--  footer -->
       <section id="section4">
 	  <footer>
          <div class="footer">
-            <div class="cutomer">
+            <div class="container">
                <div class="row">
                   <div class="col-md-12">
                      <div class="cont_call">
-                     <h3>
-                        <strong class="multi">Call Us</strong><br>
-                     </h3>
-
+                        <h3> <strong class="multi color_chang"> Call Us</strong><br>
+                           
+                        </h3>
                      </div>
                      <div class="cont">
-                        <h3> 
-                        <span style="color: white;">(+60) 196046742 smartride@gmail.com</span>
-                        </h3>
+                        <h3>(+60) 196046742 smartride@gmail.com</h3>
                         <h3> <strong class="multi">SmartRide</strong> 
-                        <span style="color: white;">UiTM Shah Alam Malaysia</span>
+                           UiTM Shah Alam Malaysia
                         </h3>
                      </div>
                   </div>
@@ -225,8 +212,6 @@
 	  </section>
       <!-- end footer -->
       <!-- Javascript files-->
-	  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	  <script src="js/script.js"></script>
       <script src="js/jquery.min.js"></script>
       <script src="js/popper.min.js"></script>
       <script src="js/bootstrap.bundle.min.js"></script>
@@ -237,7 +222,14 @@
       <script src="js/custom.js"></script>
       <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 	  <script>
-	  // Smooth scrolling to section
+		document.getElementById("search-btn").addEventListener("click", function() {
+			var searched_brand = document.getElementById("search-brand").value;
+			var url = "availablecars.html?searched_brand=" + encodeURIComponent(searched_brand);
+			window.location.href = url;
+		});
+	  </script>
+	  <script>
+		  // Smooth scrolling to section
 	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 	  anchor.addEventListener('click', function (e) {
 		e.preventDefault();
@@ -274,7 +266,7 @@
 	});
 
 	</script>
-	<script>
+		<script>
 	document.getElementById('loginButton').addEventListener('click', function() {
 	  document.getElementById('loginOverlay').style.display = 'block';
 	});
@@ -285,6 +277,6 @@
 	  }
 	});
 	</script>
-   </body>
-</html>
+	</body>
+	</html>
 

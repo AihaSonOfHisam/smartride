@@ -1,0 +1,117 @@
+.select-btn {
+    font-family: 'Righteous', cursive;
+    font-size: 17px;
+    background-color: #f6d601;
+    color: #000;
+    padding: 7px 35px;
+    text-align: center;
+    display: inline-block;
+    transition: ease-in all 0.5s;
+    position: absolute;
+    bottom: 15px; /* Distance from the bottom edge */
+    right: 15px; /* Distance from the right edge */
+ }
+
+ .select-btn:hover {
+    background-color: #f6d601;
+    color: #ffffff;
+    transition: ease-in all 0.5s;
+    border-radius: 26px;
+ }
+
+.car-container {
+     border: 1px solid #ccc;
+     padding: 15px;
+     margin-bottom: 20px;
+     display: flex;
+     align-items: center;
+     background: #2f333b ;
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for aesthetics */
+     border-radius: 8px;
+     position: relative;
+  }
+
+   .car-image {
+        height: 200px;
+       margin-right: 40px;
+       max-width: 350px;
+   }
+
+   .car-details {
+           margin-left: 20px;
+       }
+
+   .car-model {
+       font-weight: bold;
+       font-size: 24px;
+       color: yellow;
+       margin-bottom: 10px;
+   }
+   
+   .search-container {
+   display: inline-flex;
+   gap: 10px;
+   }
+
+  .car-label{
+     font-size: 18px;
+   font-family: 'Righteous', cursive;
+   color: #f6d601;
+  }
+
+  .car-info{
+     margin: 0px;
+     font-weight: 300;
+     font-size: 15px;
+     line-height: 24px;
+     color: #fff;
+  }
+   
+   .search-label {
+       font-weight: bold;
+       font-size: 28px;
+       color: white;
+       margin-bottom: 10px;
+   }
+   
+   .search-box input[type="text"] {
+   width: 300px;
+   height: 44.74px;
+   padding: 8px;
+   font-size: 16px;
+   border: 1px solid #ccc;
+   border-radius: 30px;
+   }
+
+
+   .search-button {
+       width: 100px;
+       height: 40px;
+       font-size: 16px;
+       background-color: #f6d601;
+       color: white;
+       border: none;
+       border-radius: 4px;
+       cursor: pointer;
+   }
+
+   .car-manufacturer {
+       margin-bottom: 5px;
+       font-size: 18px;
+   }
+
+   .car-year {
+       margin-bottom: 5px;
+       font-size: 18px;
+   }
+
+   .car-price {
+       font-weight: bold;
+       color: white;
+       font-size: 20px;
+   }
+
+   .car-button {
+       margin-top: 15px;
+       font-size: 18px;
+   }
