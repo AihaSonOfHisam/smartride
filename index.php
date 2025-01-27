@@ -187,11 +187,92 @@
       </div>
       <!-- end choose  section -->
 
+      <section id="section2">
+    <div class="cutomer" style="margin-bottom: 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>What says our customer</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="myCarousel" class="carousel slide cutomer_Carousel" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="prev" >Previous</li>
+                            <li data-target="#myCarousel" data-slide-to="next">Next</li>
+                        </ol>
+                        <div class="carousel-inner">
+                        <?php
+// Retrieve feedback from the feedback table
+require_once('../smartride/testdatabase.php');
+
+// Oracle query to retrieve feedback
+$query = "SELECT username, feedback FROM feedback";
+$stid = oci_parse($dbconn, $query);
+
+// Execute the query
+oci_execute($stid);
+
+// Variable to track active status for carousel items
+$active = true;
+
+while ($row = oci_fetch_assoc($stid)) {
+    $username = $row['USERNAME'];
+    $feedback = $row['FEEDBACK'];
+
+    echo '<div class="carousel-item ' . ($active ? 'active' : '') . '">';
+    echo '<div class="container">';
+    echo '<div class="carousel-caption">';
+    echo '<div class="cross_img"></div>';
+    echo '<div class="our cross_layout">';
+    echo '<div class="test_box">';
+    echo '<h4>' . $username . '</h4>';
+    echo '<p>"' . $feedback . '"</p>';
+    echo '<i><img src="images/te1.png" alt="#"/></i>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+
+    // Set active to false after the first iteration
+    $active = false;
+}
+
+// Free the statement
+oci_free_statement($stid);
+?>
+
+                        </div>
+                        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-15">
+                <div class="text-bg">
+                    <p></p>
+                    <a href="feedback.php">Add Feedback</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
       <!--  footer -->
       <section id="section4">
-	  <footer>
+	  <footer style="margin-top: 0;">
          <div class="footer">
-            <div class="cutomer">
+            <div class="cutomer" style="margin-top: 0;">
                <div class="row">
                   <div class="col-md-12">
                      <div class="cont_call">

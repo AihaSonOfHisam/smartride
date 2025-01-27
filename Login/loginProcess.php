@@ -45,39 +45,41 @@
             echo '<script>alert("Invalid username or password!"); window.location.href = "Login.html";</script>';
         }
 
-        oci_free_statement($statement); // Free resources
+        oci_free_statement($statement);
     } elseif ($loginType === "admin") {
-        // Query to fetch hashed password for admin
+        // Query to fetch the stored password for admin
         $query = "SELECT password FROM admin WHERE username = :username";
         $statement = oci_parse($dbconn, $query);
-
+    
         // Bind parameters to prevent SQL injection
         oci_bind_by_name($statement, ":username", $username);
-
+    
         // Execute the query
         oci_execute($statement);
-
+    
         if ($row = oci_fetch_assoc($statement)) {
-            // Verify the password with the hashed password from the database
-            $hashedPassword = $row['PASSWORD'];
-            if (password_verify($password, $hashedPassword)) {
+            // Fetch the stored password from the database
+            $storedPassword = $row['PASSWORD'];
+    
+            // Directly compare the input password with the stored password
+            if ($password === $storedPassword) {
                 // Password matches, set session variables
                 session_start();
                 $_SESSION['username'] = $username;
                 $_SESSION['loginType'] = $loginType;
-
+    
                 // Redirect to the admin dashboard
                 header("Location: ../admin/dashboard.php");
                 exit();
             } else {
                 // Invalid password
-                echo '<script>alert("Invalid username or password!"); window.location.href = "Login.html";</script>';
+                echo '<script>alert("Invalid password!"); window.location.href = "Login.html";</script>';
             }
         } else {
             // Admin username does not exist
-            echo '<script>alert("Invalid username or password!"); window.location.href = "Login.html";</script>';
+            echo '<script>alert("Invalid username!"); window.location.href = "Login.html";</script>';
         }
-
+        
         oci_free_statement($statement); // Free resources
     }
 
