@@ -15,54 +15,66 @@
     $loginType = $_REQUEST['login'];
 
     if ($loginType === "user") {
-        // Query for customers
-        $query = "SELECT * FROM customers WHERE username = :username AND password = :password";
+        // Query to fetch hashed password for the given username
+        $query = "SELECT password FROM customers WHERE username = :username";
         $statement = oci_parse($dbconn, $query);
 
         // Bind parameters to prevent SQL injection
         oci_bind_by_name($statement, ":username", $username);
-        oci_bind_by_name($statement, ":password", $password);
 
         // Execute the query
         oci_execute($statement);
 
         if ($row = oci_fetch_assoc($statement)) {
-            // User exists and credentials are valid, set session variables
-            session_start();
-            $_SESSION['username'] = $username;
-            
-            // Redirect to the user homepage
-            header("Location: ../index.php");
-            exit();
+            // Verify the password with the hashed password from the database
+            $hashedPassword = $row['PASSWORD'];
+            if (password_verify($password, $hashedPassword)) {
+                // Password matches, set session variables
+                session_start();
+                $_SESSION['username'] = $username;
+
+                // Redirect to the user homepage
+                header("Location: ../index.php");
+                exit();
+            } else {
+                // Invalid password
+                echo '<script>alert("Invalid username or password!"); window.location.href = "Login.html";</script>';
+            }
         } else {
-            // User does not exist or invalid credentials, display an error message
+            // Username does not exist
             echo '<script>alert("Invalid username or password!"); window.location.href = "Login.html";</script>';
         }
 
         oci_free_statement($statement); // Free resources
     } elseif ($loginType === "admin") {
-        // Query for admin
-        $query = "SELECT * FROM admin WHERE username = :username AND password = :password";
+        // Query to fetch hashed password for admin
+        $query = "SELECT password FROM admin WHERE username = :username";
         $statement = oci_parse($dbconn, $query);
 
         // Bind parameters to prevent SQL injection
         oci_bind_by_name($statement, ":username", $username);
-        oci_bind_by_name($statement, ":password", $password);
 
         // Execute the query
         oci_execute($statement);
 
         if ($row = oci_fetch_assoc($statement)) {
-            // Admin exists and credentials are valid, set session variables
-            session_start();
-            $_SESSION['username'] = $username;
-            $_SESSION['loginType'] = $loginType;
-            
-            // Redirect to the admin dashboard
-            header("Location: ../admin/dashboard.php");
-            exit();
+            // Verify the password with the hashed password from the database
+            $hashedPassword = $row['PASSWORD'];
+            if (password_verify($password, $hashedPassword)) {
+                // Password matches, set session variables
+                session_start();
+                $_SESSION['username'] = $username;
+                $_SESSION['loginType'] = $loginType;
+
+                // Redirect to the admin dashboard
+                header("Location: ../admin/dashboard.php");
+                exit();
+            } else {
+                // Invalid password
+                echo '<script>alert("Invalid username or password!"); window.location.href = "Login.html";</script>';
+            }
         } else {
-            // Admin does not exist or invalid credentials, display an error message
+            // Admin username does not exist
             echo '<script>alert("Invalid username or password!"); window.location.href = "Login.html";</script>';
         }
 
