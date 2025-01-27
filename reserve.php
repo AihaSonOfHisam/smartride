@@ -322,6 +322,7 @@
                 $plate_num = $row['PLATE_NUM'];
                 $colour = $row['COLOUR'];
                 $type = $row['TYPE'];
+                $transmission = $row['TRANSMISSION'];
                 $seat_num = $row['SEAT_NUM'];
                 $price_per_day = $row['PRICE_PER_DAY'];
                 $price_per_week = $row['PRICE_PER_WEEK'];
@@ -335,6 +336,7 @@
                 echo '<div class="car-model">' . htmlspecialchars($brand) . ' ' . htmlspecialchars($model) . '</div>';
                 echo '<div class="car-price">' . htmlspecialchars($colour) . '</div>';
                 echo '<div class="car-price">' . htmlspecialchars($type) . '</div>';
+                echo '<div class="car-price">' . htmlspecialchars($transmission) . ' Transmission</div>';
                 echo '<div class="car-price">' . htmlspecialchars($seat_num) . ' Seater' . '</div>';
                 echo '<div class="car-price">Price per Day: RM' . htmlspecialchars($price_per_day) . '</div>';
                 echo '<div class="car-price">Price per Week: RM' . htmlspecialchars($price_per_week) . '</div>';
