@@ -127,7 +127,7 @@ while ($row = oci_fetch_assoc($statement)) {
     echo "<td>" . htmlspecialchars($rentType) . "</td>";
     echo "<td>" . htmlspecialchars($status) . "</td>";
     echo "<td>" . htmlspecialchars($startRentDate) . "</td>";
-    echo "<td><a href='reservation functions/delete.php?reservation_id=" . $id . "' class='btn btn-danger'>Delete</a></td>";
+    echo "<td><a href='reservation functions/delete.php?reservation_id=" . $id . "' class='btn btn-danger'onclick='return confirmDelete()'>Delete</a></td>";
     echo "<td><a href='reservation functions/verified.php?reservation_id=" . $id . "' class='btn btn-primary' style='margin: auto; display: block;'>Verified</a></td>";
     echo "</tr>";
 }
@@ -158,7 +158,11 @@ oci_free_statement($statement);
     <script src="assets/js/jquery.metisMenu.js"></script>
     <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
-
+    <script>
+function confirmDelete() {
+  return confirm("Are you sure you want to delete this data?");
+}
+</script>
 
 </body>
 </html>

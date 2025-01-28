@@ -132,7 +132,7 @@ while ($row = oci_fetch_assoc($stid)) {
     echo "<td>" . htmlspecialchars($role) . "</td>";
     echo "<td>" . htmlspecialchars($salary) . "</td>";
     echo "<td><a href='staffs functions/edit.php?ic=" . urlencode($ic) . "' class='btn btn-info'>Edit</a></td>";
-    echo "<td><a href='staffs functions/delete.php?ic=" . urlencode($ic) . "' class='btn btn-danger'>Delete</a></td>";
+    echo "<td><a href='staffs functions/delete.php?ic=" . urlencode($ic) . "' class='btn btn-danger'onclick='return confirmDelete()'>Delete</a></td>";
     echo "</tr>";
 }
 
@@ -164,7 +164,11 @@ oci_close($dbconn);
     <script src="assets/js/jquery.metisMenu.js"></script>
     <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
-
+    <script>
+function confirmDelete() {
+  return confirm("Are you sure you want to delete this staff?");
+}
+</script>
 
 </body>
 </html>

@@ -128,7 +128,7 @@
                                 echo "<td>" . "RM " . $pricePerMonth . "</td>";
                                 echo "<td>" . $status . "</td>";
                                 echo "<td><a href='car functions/edit.php?plate_num=" . $plateNumber . "' class='btn btn-info'>Edit</a></td>";
-                                echo "<td><a href='car functions/delete.php?plate_num=" . $plateNumber . "' class='btn btn-danger'>Delete</a></td>";
+                                echo "<td><a href='car functions/delete.php?plate_num=" . $plateNumber . "' class='btn btn-danger'onclick='return confirmDelete()'>Delete</a></td>";
                                 echo "</tr>";
                             }
                             ?>
@@ -156,6 +156,11 @@
     <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
 
+    <script>
+function confirmDelete() {
+  return confirm("Are you sure you want to delete this car?");
+}
+</script>
 
 </body>
 </html>
