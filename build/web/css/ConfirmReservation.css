@@ -1,0 +1,57 @@
+body {
+    background-color: #1a1a1a;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.reservation-container {
+    background: #333;
+    padding: 20px;
+    width: 50%;
+    margin: 50px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+    color: white;
+    font-weight: bold;
+}
+
+.car-detail {
+    margin-top: 20px;
+}
+
+.car-info h3 {
+    color: yellow;
+    font-size: 20px;
+}
+
+.total-amount {
+    font-weight: bold;
+    color: yellow;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.cancel-btn {
+    background-color: red;
+    color: white;
+}
+
+.proceed-btn {
+    background-color: yellow;
+    color: black;
+}

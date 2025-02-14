@@ -1,0 +1,57 @@
+body {
+    background-color: #FFD700;
+    font-family: Arial, sans-serif;
+}
+
+.payment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+    max-width: 800px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.summary {
+    background-color: #2C3E50;
+    color: white;
+    padding: 20px;
+    width: 40%;
+}
+
+.summary h2 {
+    margin-bottom: 15px;
+}
+
+.payment-form {
+    padding: 20px;
+    width: 60%;
+}
+
+.payment-form h2 {
+    margin-bottom: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #E67E22;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #D35400;
+}
